@@ -26,10 +26,11 @@ export function getUserPreferences() {
       'https://customizr.at.cimpress.io/v1/resources/penguin/settings',
       options,
     )
-      .then((response) => {
+      .then((response) => response.json())
+      .then((data) => {
         dispatch({
           type: 'USER_PREFERENCES_CHANGED',
-          data: JSON.parse(response),
+          data,
         });
       })
       .catch((error) => {

@@ -15,7 +15,7 @@ class NewRelicClient {
     return fetch(
       `https://api.newrelic.com/v2/alerts_policies.json?filter[name]=${search}`,
       options,
-    ).then((response) => JSON.parse(response));
+    ).then((response) => response.json());
   }
 
   getAlerts({ policies }) {
@@ -29,13 +29,14 @@ class NewRelicClient {
     return fetch(
       'https://api.newrelic.com/v2/alerts_violations.json?only_open=true',
       options,
-    ).then((response) => {
-      const alerts = JSON.parse(response);
-      const violations = _filter(alerts.violations, (violation) =>
-        _find(policies, (policy) => violation.policy_name === policy),
-      );
-      return violations;
-    });
+    )
+      .then((response) => response.json())
+      .then((alerts) => {
+        const violations = _filter(alerts.violations, (violation) =>
+          _find(policies, (policy) => violation.policy_name === policy),
+        );
+        return violations;
+      });
   }
 }
 

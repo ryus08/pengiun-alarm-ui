@@ -1,8 +1,7 @@
 /* eslint-disable no-nested-ternary */
 import React from 'react';
-import { decode } from 'jsonwebtoken';
 import Loading from './loadingpenguin';
-import auth, { getAccessToken } from '../auth';
+import auth from '../auth';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,17 +11,8 @@ class App extends React.Component {
     this.refreshAuth = this.refreshAuth.bind(this);
   }
 
-  // eslint-disable-next-line camelcase
   UNSAFE_componentWillMount() {
-    return auth.isLoggedIn() ? this.setupTokenRefresh() : this.login();
-  }
-
-  setupTokenRefresh() {
-    const accessToken = getAccessToken();
-    const expireTimestamp = decode(accessToken).exp * 1000; // jwt exp is in seconds
-    const msTillExpire = expireTimestamp - Date.now();
-
-    return setTimeout(this.refreshAuth, msTillExpire - msTillExpire * 0.25);
+    return this.login();
   }
 
   refreshAuth() {

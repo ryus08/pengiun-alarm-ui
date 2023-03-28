@@ -17,8 +17,7 @@ export default function activityPoller({ config, update }) {
         return P.resolve(5000);
       }
 
-      return configuration
-        .pollMethod()
+      return new P(() => configuration.pollMethod())
         .then((data) => update({ data }))
         .catch((e) => {
           // eslint-disable-next-line no-console

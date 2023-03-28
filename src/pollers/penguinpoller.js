@@ -33,7 +33,7 @@ export default function penguinPoller({ config, update }) {
           );
       }
 
-      return pollType()
+      return new P(() => pollType())
         .catch((e) => {
           // eslint-disable-next-line no-console
           console.log(e);

@@ -34,7 +34,7 @@ class PenguinClient {
   getOpinions() {
     const options = this.generateOptions();
     return fetch(`${penguinHost}/${this.configName}/opinions`, options).then(
-      (response) => JSON.parse(response),
+      (response) => response.json(),
     );
   }
 
@@ -42,9 +42,9 @@ class PenguinClient {
     return fetch(
       `${penguinHost}/configurations/${this.configName}`,
       this.generateOptions(),
-    ).then((response) => {
-      if (response) {
-        const parsedResponse = JSON.parse(response);
+    )
+      .then((response) => response.json())
+      .then((parsedResponse) => {
         if (
           parsedResponse.newrelic &&
           parsedResponse.newrelic.policy &&
@@ -54,81 +54,49 @@ class PenguinClient {
           delete parsedResponse.newrelic.policy;
         }
         return parsedResponse;
-      }
-      return undefined;
-    });
+      });
   }
 
   getAchievements() {
     return fetch(
       `${penguinHost}/${this.configName}/achievements`,
       this.generateOptions(),
-    ).then((response) => {
-      if (response) {
-        return JSON.parse(response);
-      }
-      return undefined;
-    });
+    ).then((response) => response.json());
   }
 
   getProjectEffort() {
     return fetch(
       `${penguinHost}/${this.configName}/projectEffort`,
       this.generateOptions(),
-    ).then((response) => {
-      if (response) {
-        return JSON.parse(response);
-      }
-      return undefined;
-    });
+    ).then((response) => response.json());
   }
 
   getCommentActivity() {
     return fetch(
       `${penguinHost}/${this.configName}/activity/comments`,
       this.generateOptions(),
-    ).then((response) => {
-      if (response) {
-        return JSON.parse(response);
-      }
-      return undefined;
-    });
+    ).then((response) => response.json());
   }
 
   getMergeActivity() {
     return fetch(
       `${penguinHost}/${this.configName}/activity/merges`,
       this.generateOptions(),
-    ).then((response) => {
-      if (response) {
-        return JSON.parse(response);
-      }
-      return undefined;
-    });
+    ).then((response) => response.json());
   }
 
   getApprovalActivity() {
     return fetch(
       `${penguinHost}/${this.configName}/activity/approvals`,
       this.generateOptions(),
-    ).then((response) => {
-      if (response) {
-        return JSON.parse(response);
-      }
-      return undefined;
-    });
+    ).then((response) => response.json());
   }
 
   getTeamActivity() {
     return fetch(
       `${penguinHost}/${this.configName}/activity/team`,
       this.generateOptions(),
-    ).then((response) => {
-      if (response) {
-        return JSON.parse(response);
-      }
-      return undefined;
-    });
+    ).then((response) => response.json());
   }
 
   deleteConfig() {
@@ -141,9 +109,10 @@ class PenguinClient {
     return P.map(groupIds, (groupId) => {
       const options = _assign(this.generateOptions(), { simple: false });
 
-      return fetch(`${penguinHost}/groups?name=${groupId}`, options).then(
-        (response) => {
-          let nameIdPair = JSON.parse(response)[0];
+      return fetch(`${penguinHost}/groups?name=${groupId}`, options)
+        .then((response) => response.json())
+        .then((data) => {
+          let nameIdPair = data[0];
           if (!nameIdPair) {
             nameIdPair = {
               id: groupId,
@@ -151,8 +120,7 @@ class PenguinClient {
             };
           }
           return nameIdPair;
-        },
-      );
+        });
     });
   }
 
@@ -160,21 +128,21 @@ class PenguinClient {
     return fetch(
       `${penguinHost}/${this.configName}/deploymentHistory`,
       this.generateOptions(),
-    ).then((response) => JSON.parse(response));
+    ).then((response) => response.json());
   }
 
   getDeployments() {
     return fetch(
       `${penguinHost}/${this.configName}/deployments`,
       this.generateOptions(),
-    ).then((response) => JSON.parse(response));
+    ).then((response) => response.json());
   }
 
   getMerges() {
     return fetch(
       `${penguinHost}/${this.configName}/merges`,
       this.generateOptions(),
-    ).then((response) => JSON.parse(response));
+    ).then((response) => response.json());
   }
 
   update({ newrelic, gitlab, slideshow }) {
