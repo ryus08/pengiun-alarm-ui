@@ -1,8 +1,6 @@
-import rp from 'request-promise';
 import { getAccessToken } from '../auth';
 
-const generateOptions = (uri) => ({
-  uri,
+const generateOptions = () => ({
   auth: {
     bearer: getAccessToken(),
   },
@@ -10,24 +8,24 @@ const generateOptions = (uri) => ({
 
 export function setUserPreferences(data) {
   return (dispatch) => {
-    const options = generateOptions(
-      'https://customizr.at.cimpress.io/v1/resources/penguin/settings',
-    );
+    const options = generateOptions();
     options.method = 'PUT';
     options.json = data;
-    return rp(options).then(() =>
-      dispatch({ type: 'USER_PREFERENCES_CHANGED', data }),
-    );
+    return fetch(
+      'https://customizr.at.cimpress.io/v1/resources/penguin/settings',
+      options,
+    ).then(() => dispatch({ type: 'USER_PREFERENCES_CHANGED', data }));
   };
 }
 
 export function getUserPreferences() {
   return (dispatch) => {
-    const options = generateOptions(
-      'https://customizr.at.cimpress.io/v1/resources/penguin/settings',
-    );
+    const options = generateOptions();
     options.method = 'GET';
-    return rp(options)
+    return fetch(
+      'https://customizr.at.cimpress.io/v1/resources/penguin/settings',
+      options,
+    )
       .then((response) => {
         dispatch({
           type: 'USER_PREFERENCES_CHANGED',

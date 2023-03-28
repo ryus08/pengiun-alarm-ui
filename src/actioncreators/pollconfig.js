@@ -1,10 +1,9 @@
-import rp from 'request-promise';
 import YAML from 'yamljs';
 
 function pollConfig({ configUrl }) {
   return (dispatch) => {
     const refresh = () =>
-      rp(configUrl)
+      fetch(configUrl)
         .then((response) => YAML.parse(response))
         .then((configuration) => {
           dispatch({ type: 'CONFIGURATION_LOADED', configuration });

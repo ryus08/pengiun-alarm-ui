@@ -1,5 +1,4 @@
 /* eslint-disable camelcase, class-methods-use-this */
-import rp from 'request-promise';
 import P from 'bluebird';
 import { assign as _assign } from 'lodash';
 import penguinHost from '../constants';
@@ -10,9 +9,8 @@ class PenguinClient {
     this.configName = configName;
   }
 
-  generateOptions(uri) {
+  generateOptions() {
     return {
-      uri,
       auth: {
         bearer: getAccessToken(),
       },
@@ -20,28 +18,30 @@ class PenguinClient {
   }
 
   setOpinion({ mergeId, value, project_id, iid }) {
-    const options = this.generateOptions(
-      `${penguinHost}/${this.configName}/opinions/${mergeId}`,
-    );
+    const options = this.generateOptions();
     options.method = 'PUT';
     options.json = {
       sick: value,
       project_id,
       iid,
     };
-    return rp(options);
+    return fetch(
+      `${penguinHost}/${this.configName}/opinions/${mergeId}`,
+      options,
+    );
   }
 
   getOpinions() {
-    const options = this.generateOptions(
-      `${penguinHost}/${this.configName}/opinions`,
+    const options = this.generateOptions();
+    return fetch(`${penguinHost}/${this.configName}/opinions`, options).then(
+      (response) => JSON.parse(response),
     );
-    return rp(options).then((response) => JSON.parse(response));
   }
 
   getConfig() {
-    return rp(
-      this.generateOptions(`${penguinHost}/configurations/${this.configName}`),
+    return fetch(
+      `${penguinHost}/configurations/${this.configName}`,
+      this.generateOptions(),
     ).then((response) => {
       if (response) {
         const parsedResponse = JSON.parse(response);
@@ -60,8 +60,9 @@ class PenguinClient {
   }
 
   getAchievements() {
-    return rp(
-      this.generateOptions(`${penguinHost}/${this.configName}/achievements`),
+    return fetch(
+      `${penguinHost}/${this.configName}/achievements`,
+      this.generateOptions(),
     ).then((response) => {
       if (response) {
         return JSON.parse(response);
@@ -71,8 +72,9 @@ class PenguinClient {
   }
 
   getProjectEffort() {
-    return rp(
-      this.generateOptions(`${penguinHost}/${this.configName}/projectEffort`),
+    return fetch(
+      `${penguinHost}/${this.configName}/projectEffort`,
+      this.generateOptions(),
     ).then((response) => {
       if (response) {
         return JSON.parse(response);
@@ -82,10 +84,9 @@ class PenguinClient {
   }
 
   getCommentActivity() {
-    return rp(
-      this.generateOptions(
-        `${penguinHost}/${this.configName}/activity/comments`,
-      ),
+    return fetch(
+      `${penguinHost}/${this.configName}/activity/comments`,
+      this.generateOptions(),
     ).then((response) => {
       if (response) {
         return JSON.parse(response);
@@ -95,8 +96,9 @@ class PenguinClient {
   }
 
   getMergeActivity() {
-    return rp(
-      this.generateOptions(`${penguinHost}/${this.configName}/activity/merges`),
+    return fetch(
+      `${penguinHost}/${this.configName}/activity/merges`,
+      this.generateOptions(),
     ).then((response) => {
       if (response) {
         return JSON.parse(response);
@@ -106,10 +108,9 @@ class PenguinClient {
   }
 
   getApprovalActivity() {
-    return rp(
-      this.generateOptions(
-        `${penguinHost}/${this.configName}/activity/approvals`,
-      ),
+    return fetch(
+      `${penguinHost}/${this.configName}/activity/approvals`,
+      this.generateOptions(),
     ).then((response) => {
       if (response) {
         return JSON.parse(response);
@@ -119,8 +120,9 @@ class PenguinClient {
   }
 
   getTeamActivity() {
-    return rp(
-      this.generateOptions(`${penguinHost}/${this.configName}/activity/team`),
+    return fetch(
+      `${penguinHost}/${this.configName}/activity/team`,
+      this.generateOptions(),
     ).then((response) => {
       if (response) {
         return JSON.parse(response);
@@ -130,68 +132,62 @@ class PenguinClient {
   }
 
   deleteConfig() {
-    const options = _assign(
-      this.generateOptions(`${penguinHost}/configurations/${this.configName}`),
-      { method: 'DELETE' },
-    );
+    const options = _assign(this.generateOptions(), { method: 'DELETE' });
 
-    return rp(options);
+    return fetch(`${penguinHost}/configurations/${this.configName}`, options);
   }
 
   getNames({ groupIds }) {
     return P.map(groupIds, (groupId) => {
-      const options = _assign(
-        this.generateOptions(`${penguinHost}/groups?name=${groupId}`),
-        { simple: false },
-      );
+      const options = _assign(this.generateOptions(), { simple: false });
 
-      return rp(options).then((response) => {
-        let nameIdPair = JSON.parse(response)[0];
-        if (!nameIdPair) {
-          nameIdPair = {
-            id: groupId,
-            name: `${groupId} - Missing name`,
-          };
-        }
-        return nameIdPair;
-      });
+      return fetch(`${penguinHost}/groups?name=${groupId}`, options).then(
+        (response) => {
+          let nameIdPair = JSON.parse(response)[0];
+          if (!nameIdPair) {
+            nameIdPair = {
+              id: groupId,
+              name: `${groupId} - Missing name`,
+            };
+          }
+          return nameIdPair;
+        },
+      );
     });
   }
 
   getDeploymentHistory() {
-    return rp(
-      this.generateOptions(
-        `${penguinHost}/${this.configName}/deploymentHistory`,
-      ),
+    return fetch(
+      `${penguinHost}/${this.configName}/deploymentHistory`,
+      this.generateOptions(),
     ).then((response) => JSON.parse(response));
   }
 
   getDeployments() {
-    return rp(
-      this.generateOptions(`${penguinHost}/${this.configName}/deployments`),
+    return fetch(
+      `${penguinHost}/${this.configName}/deployments`,
+      this.generateOptions(),
     ).then((response) => JSON.parse(response));
   }
 
   getMerges() {
-    return rp(
-      this.generateOptions(`${penguinHost}/${this.configName}/merges`),
+    return fetch(
+      `${penguinHost}/${this.configName}/merges`,
+      this.generateOptions(),
     ).then((response) => JSON.parse(response));
   }
 
   update({ newrelic, gitlab, slideshow }) {
-    const options = _assign(
-      this.generateOptions(`${penguinHost}/configurations/${this.configName}`),
-      {
-        method: 'PUT',
-        json: {
-          newrelic,
-          gitlab,
-          slideshow,
-        },
+    const options = _assign(this.generateOptions(), {
+      method: 'PUT',
+      json: {
+        newrelic,
+        gitlab,
+        slideshow,
       },
-    );
+    });
 
-    return rp(options);
+    return fetch(`${penguinHost}/configurations/${this.configName}`, options);
   }
 }
 
