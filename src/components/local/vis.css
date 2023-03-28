@@ -1,0 +1,49 @@
+.vis-labelset .vis-label {
+  color: white
+}
+
+.vis-time-axis .vis-text {
+  color: white
+}
+
+.vis-foreground .vis-group {
+  border-top: 1px solid rgba(0, 0, 0, .5);
+  border-bottom: none;
+}
+
+.vis-group.even, .vis-label.even {
+  background: rgba(0, 0, 0, .1);
+}
+
+.vis-panel.vis-bottom, .vis-panel.vis-center, .vis-panel.vis-left, .vis-panel.vis-right, .vis-panel.vis-top {
+  border: 1px solid rgba(0, 0, 0, 1);
+  border-top: none;
+  border-left: none;
+}
+
+.vis-time-axis .vis-grid.vis-major {
+  border-width: 1px;
+  border-color:rgba(0, 0, 0, .5);
+}
+
+.vis-time-axis .vis-grid.vis-minor {
+  border-width: 1px;
+  border-color: rgba(0, 0, 0, .2);
+}
+
+.vis-time-axis .vis-text.vis-saturday, .vis-time-axis .vis-text.vis-sunday {
+  background: rgba(0, 0, 0, .5);
+}
+
+.vis-time-axis .vis-text {
+  text-align: center;
+}
+
+.vis-labelset .vis-label {
+  border-bottom: none;
+  border-top: 1px solid rgba(0, 0, 0, .5);
+}
+
+.vis-timeline {
+  border: none
+}

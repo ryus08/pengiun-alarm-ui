@@ -1,0 +1,111 @@
+{
+  "extends": [
+    "airbnb",
+    "airbnb/hooks",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "jest": true,
+    "mocha": true,
+    "node": true
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx", ".json"]
+      }
+    }
+  },
+  "rules": {
+    "default-param-last": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "curly": ["error", "all"],
+    "no-empty": "off",
+    "no-await-in-loop": "off",
+    "no-restricted-syntax": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true,
+        "optionalDependencies": false,
+        "peerDependencies": false
+      }
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": [
+          "arrow-function",
+          "function-declaration"
+        ],
+        "unnamedComponents": [
+          "arrow-function",
+          "function-expression"
+        ]
+      }
+    ],
+    "jsx-a11y/label-has-for": "off",
+    "no-plusplus": [
+      "error",
+      {
+        "allowForLoopAfterthoughts": true
+      }
+    ],
+    "no-param-reassign": [
+      "error",
+      {
+        "props": false
+      }
+    ],
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "operator-linebreak": "off",
+    "jsx-a11y/alt-text": "off",
+    "no-underscore-dangle": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/prop-types": "off",
+    "max-statements": [
+      "error",
+      15,
+      {
+        "ignoreTopLevelFunctions": true
+      }
+    ],
+    "complexity": [
+      "error",
+      {
+        "max": 8
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["*.jsx", "*.js"],
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-var-requires": "off",
+        "no-useless-constructor": "off",
+        "@typescript-eslint/no-useless-constructor": "off"
+      }
+    }
+  ],
+  "plugins": ["@typescript-eslint", "react-hooks", "chai-friendly"],
+  "globals": {
+    "mockHistoryPush": true
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "name": "penguinalarm",
+  "version": "0.1.0",
+  "private": true,
+  "resolutions": {
+    "react-error-overlay": "6.0.9"
+  },
+  "dependencies": {
+    "@cimpress/simple-auth-wrapper": "^8.3.0",
+    "assert": "^2.0.0",
+    "bluebird": "^3.5.1",
+    "browserify-zlib": "^0.2.0",
+    "crypto-browserify": "^3.12.0",
+    "depcheck": "^1.4.3",
+    "fs": "^0.0.1-security",
+    "https-browserify": "^1.0.0",
+    "jsonwebtoken": "^9.0.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "moment-business-time": "^2.0.0",
+    "os": "^0.1.2",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1",
+    "path-parser": "^6.1.0",
+    "prop-types": "^15.6.0",
+    "query-string": "^8.1.0",
+    "randomcolor": "^0.6.2",
+    "react": "^18.2.0",
+    "react-app-rewired": "^2.2.1",
+    "react-calendar": "^4.1.0",
+    "react-color": "^2.13.8",
+    "react-delay-input": "^4.0.4",
+    "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
+    "react-player": "^2.12.0",
+    "react-redux": "^8.0.5",
+    "react-scripts": "^5.0.1",
+    "react-select": "^5.7.2",
+    "react-visjs-timeline": "^1.6.0",
+    "recharts": "^2.5.0",
+    "redux": "^4.2.1",
+    "redux-thunk": "^2.3.0",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.2",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^2.1.4",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "typescript": "^5.0.2",
+    "url": "^0.11.0",
+    "util": "^0.12.5",
+    "vis": "^4.21.0-EOL",
+    "vis-timeline": "^7.7.0",
+    "yamljs": "^0.3.0"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "clean": "rm -rf build",
+    "eject": "react-scripts eject",
+    "eslint": "eslint ./src --ext .js --ext .jsx",
+    "eslint-fix": "eslint --fix ./src --ext .js --ext .jsx",
+    "pretest": "npm run eslint-check && eslint ./src",
+    "preinstall": "npx npm-force-resolutions"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.34.0",
+    "@typescript-eslint/parser": "^5.34.0",
+    "ajv": "^7.2.4",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-chai-friendly": "^0.7.2",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "lint-staged": "^13.1.2",
+    "prettier": "^2.7.1",
+    "react-error-overlay": "^6.0.11"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "npm run eslint-fix",
+      "git add"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "precommit": "lint-staged",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

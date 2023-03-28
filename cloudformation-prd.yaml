@@ -1,0 +1,82 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Penguin Alarm CloudFormation stack.
+
+Resources:
+  ###### Static Website ######
+
+  ###### S3 for static website hosting ######
+  # Bucket for prd environment
+  WebsiteBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: prd-penguinalarm
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+
+  WebsiteBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref WebsiteBucket
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              CanonicalUser: d1ec73dcdf33028eb993194a939ef11f38a55fc3ce0aec8c7ab886cb45c3d18dc50fb87d498ccd8f1b98fee479bbe706
+            Action:
+              - s3:GetObject
+            Resource: !Sub "arn:aws:s3:::${WebsiteBucket}/*"
+
+  ###### CloudFront for static website hosting ######
+  # Distribution for prd environment
+  CloudFrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Aliases:
+          - penguin.fi.cimpress.io
+        DefaultCacheBehavior:
+          LambdaFunctionAssociations:
+            - EventType: 'origin-request'
+              LambdaFunctionARN: arn:aws:lambda:us-east-1:732882016815:function:RevEdgeLambda-EdgeLambdaFunction-P7Q43MP0KNEI:2
+          DefaultTTL: 300
+          ForwardedValues:
+            QueryString: false
+          TargetOriginId: S3-PenguinAlarm-prd
+          ViewerProtocolPolicy : redirect-to-https
+        DefaultRootObject: index.html
+        Enabled: true
+        HttpVersion: http2
+        Origins:
+          - DomainName: !GetAtt WebsiteBucket.DomainName
+            Id: S3-PenguinAlarm-prd
+            S3OriginConfig:
+              OriginAccessIdentity: origin-access-identity/cloudfront/ETJ3EAIJUTRFI
+        ViewerCertificate:
+          AcmCertificateArn: arn:aws:acm:us-east-1:732882016815:certificate/d25324f7-10c5-461e-ae1d-893c64679ef5
+          MinimumProtocolVersion: TLSv1.1_2016
+          SslSupportMethod: sni-only
+        CustomErrorResponses:
+          - ErrorCachingMinTTL: '0'
+            ErrorCode: '403'
+            ResponseCode: '200'
+            ResponsePagePath: "/index.html"
+        Logging:
+          Bucket: fi.cloudfront-logs.s3.amazonaws.com
+          IncludeCookies: false
+          Prefix: fi.S3-PenguinAlarm-prd
+        WebACLId: "arn:aws:wafv2:us-east-1:732882016815:global/webacl/FuN-Web-ACL-Global/53286c9e-86e1-4585-b945-a139242e73d4"
+
+  ###### Route 53 for static website hosting ######
+  # DNS alias for the prd environment
+  WebsiteRecordSet:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      Name: penguin.fi.cimpress.io
+      Type: A
+      AliasTarget:
+        DNSName: !GetAtt CloudFrontDistribution.DomainName
+        HostedZoneId: Z2FDTNDATAQYW2 # built-in CloudFormation hosted zone ID
+      HostedZoneId: Z261VLTX7NJVGD # fi.cimpress.io

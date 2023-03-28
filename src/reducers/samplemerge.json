@@ -1,0 +1,219 @@
+{
+  "id": 4326,
+  "iid": 1,
+  "project_id": 953,
+  "title": "First Version - still working on tests",
+  "description": "Still working tests...",
+  "state": "opened",
+  "created_at": "2017-12-14T19:33:04.401Z",
+  "updated_at": "2017-12-15T18:30:56.938Z",
+  "target_branch": "master",
+  "source_branch": "feature/firstversion",
+  "upvotes": 0,
+  "downvotes": 0,
+  "author": {
+    "id": 93,
+    "name": "Amol Deshmukh",
+    "username": "amdeshmukh",
+    "state": "active",
+    "avatar_url": "https://cimpress.gitlab.io/uploads/-/system/user/avatar/93/avatar.png",
+    "web_url": "https://cimpress.gitlab.io/amdeshmukh"
+  },
+  "assignee": null,
+  "source_project_id": 953,
+  "target_project_id": 953,
+  "labels": [],
+  "work_in_progress": false,
+  "milestone": null,
+  "merge_when_pipeline_succeeds": false,
+  "merge_status": "can_be_merged",
+  "sha": "87ae3d18c0485ccde19d4467623ef901c6c3a3ab",
+  "merge_commit_sha": null,
+  "user_notes_count": 4,
+  "approvals_before_merge": null,
+  "discussion_locked": null,
+  "should_remove_source_branch": null,
+  "force_remove_source_branch": true,
+  "squash": true,
+  "web_url": "https://cimpress.gitlab.io/belt/middlewares/requestresponselogger/merge_requests/1",
+  "time_stats": {
+    "time_estimate": 0,
+    "total_time_spent": 0,
+    "human_time_estimate": null,
+    "human_total_time_spent": null
+  },
+  "projectName": "requestresponselogger",
+  "comments": [
+    {
+      "id": 45948,
+      "body": "What happens if data isn't defined or null? I see data being used regardless later on, I can't tell the full scope so maybe we can, but can we safely proceed without handling?",
+      "attachment": null,
+      "author": {
+        "id": 111,
+        "name": "Rohit Saigal",
+        "username": "rsaigal",
+        "state": "active",
+        "avatar_url": "https://cimpress.gitlab.io/uploads/-/system/user/avatar/111/avatar.png",
+        "web_url": "https://cimpress.gitlab.io/rsaigal"
+      },
+      "created_at": "2017-12-14T19:58:39.763Z",
+      "updated_at": "2017-12-14T19:58:39.763Z",
+      "system": false,
+      "noteable_id": 4326,
+      "noteable_type": "MergeRequest",
+      "noteable_iid": 1
+    },
+    {
+      "id": 45941,
+      "body": "Optional but if you use _get(res,'locals[namespaceRoot][elapsedTime]', null) so you don't have res.locals[namespaceRoot] typed out twice (following DRY principle)",
+      "attachment": null,
+      "author": {
+        "id": 111,
+        "name": "Rohit Saigal",
+        "username": "rsaigal",
+        "state": "active",
+        "avatar_url": "https://cimpress.gitlab.io/uploads/-/system/user/avatar/111/avatar.png",
+        "web_url": "https://cimpress.gitlab.io/rsaigal"
+      },
+      "created_at": "2017-12-14T19:51:49.161Z",
+      "updated_at": "2017-12-14T19:51:49.161Z",
+      "system": false,
+      "noteable_id": 4326,
+      "noteable_type": "MergeRequest",
+      "noteable_iid": 1
+    },
+    {
+      "id": 46698,
+      "body": "also could these brackets be better here?",
+      "attachment": null,
+      "author": {
+        "id": 94,
+        "name": "Eric Basile",
+        "username": "ebasile",
+        "state": "active",
+        "avatar_url": "https://secure.gravatar.com/avatar/1c4eba86f02cbd68f5e18c662b2cc1a0?s=80&d=identicon",
+        "web_url": "https://cimpress.gitlab.io/ebasile"
+      },
+      "created_at": "2017-12-15T15:10:45.297Z",
+      "updated_at": "2017-12-15T15:10:45.297Z",
+      "system": false,
+      "noteable_id": 4326,
+      "noteable_type": "MergeRequest",
+      "noteable_iid": 1
+    },
+    {
+      "id": 46695,
+      "body": "should there be a return line after that comma? \n\nthe brackets and spacing here look wonky but may not be.",
+      "attachment": null,
+      "author": {
+        "id": 94,
+        "name": "Eric Basile",
+        "username": "ebasile",
+        "state": "active",
+        "avatar_url": "https://secure.gravatar.com/avatar/1c4eba86f02cbd68f5e18c662b2cc1a0?s=80&d=identicon",
+        "web_url": "https://cimpress.gitlab.io/ebasile"
+      },
+      "created_at": "2017-12-15T15:09:17.655Z",
+      "updated_at": "2017-12-15T15:09:17.655Z",
+      "system": false,
+      "noteable_id": 4326,
+      "noteable_type": "MergeRequest",
+      "noteable_iid": 1
+    }
+  ],
+  "approvers": {
+    "id": 4326,
+    "iid": 1,
+    "project_id": 953,
+    "title": "First Version - still working on tests",
+    "description": "Still working tests...",
+    "state": "opened",
+    "created_at": "2017-12-14T19:33:04.401Z",
+    "updated_at": "2017-12-15T18:30:56.938Z",
+    "merge_status": "can_be_merged",
+    "approvals_required": 1,
+    "approvals_left": 0,
+    "approved_by": [
+      {
+        "user": {
+          "id": 94,
+          "name": "Eric Basile",
+          "username": "ebasile",
+          "state": "active",
+          "avatar_url": "https://secure.gravatar.com/avatar/1c4eba86f02cbd68f5e18c662b2cc1a0?s=80&d=identicon",
+          "web_url": "https://cimpress.gitlab.io/ebasile"
+        }
+      },
+      {
+        "user": {
+          "id": 111,
+          "name": "Rohit Saigal",
+          "username": "rsaigal",
+          "state": "active",
+          "avatar_url": "https://cimpress.gitlab.io/uploads/-/system/user/avatar/111/avatar.png",
+          "web_url": "https://cimpress.gitlab.io/rsaigal"
+        }
+      }
+    ],
+    "suggested_approvers": [
+      {
+        "id": 150,
+        "name": "Frances Swiecki-Bernhardt",
+        "username": "fswieckibernhardt",
+        "state": "active",
+        "avatar_url": "https://cimpress.gitlab.io/uploads/-/system/user/avatar/150/avatar.png",
+        "web_url": "https://cimpress.gitlab.io/fswieckibernhardt"
+      },
+      {
+        "id": 67,
+        "name": "Brian Weber",
+        "username": "bweber",
+        "state": "active",
+        "avatar_url": "https://secure.gravatar.com/avatar/deb1946cb3c1883b1e504dc95b834c55?s=80&d=identicon",
+        "web_url": "https://cimpress.gitlab.io/bweber"
+      },
+      {
+        "id": 86,
+        "name": "Anthony Frasso",
+        "username": "afrasso",
+        "state": "active",
+        "avatar_url": "https://cimpress.gitlab.io/uploads/-/system/user/avatar/86/avatar.png",
+        "web_url": "https://cimpress.gitlab.io/afrasso"
+      },
+      {
+        "id": 43,
+        "name": "Dana Ward",
+        "username": "daward",
+        "state": "active",
+        "avatar_url": "https://cimpress.gitlab.io/uploads/-/system/user/avatar/43/avatar.png",
+        "web_url": "https://cimpress.gitlab.io/daward"
+      },
+      {
+        "id": 44,
+        "name": "Tyler Wack",
+        "username": "twack",
+        "state": "active",
+        "avatar_url": "https://secure.gravatar.com/avatar/b0267c4aa9341b31d1112db40dc0b7b3?s=80&d=identicon",
+        "web_url": "https://cimpress.gitlab.io/twack"
+      },
+      {
+        "id": 84,
+        "name": "Houtan Sadafi",
+        "username": "hsadafi",
+        "state": "active",
+        "avatar_url": "https://cimpress.gitlab.io/uploads/-/system/user/avatar/84/avatar.png",
+        "web_url": "https://cimpress.gitlab.io/hsadafi"
+      },
+      {
+        "id": 100,
+        "name": "Zachary Marois",
+        "username": "zmarois",
+        "state": "active",
+        "avatar_url": "https://cimpress.gitlab.io/uploads/-/system/user/avatar/100/avatar.png",
+        "web_url": "https://cimpress.gitlab.io/zmarois"
+      }
+    ],
+    "user_has_approved": false,
+    "user_can_approve": true
+  }
+}

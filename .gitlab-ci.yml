@@ -1,0 +1,90 @@
+include:
+  - project: Cimpress-Technology/orders/infrastructure/gitlab-templates
+    file: ci/react-spa.gitlab-ci.yml
+  - project: Cimpress-Technology/product-catalog/infrastructure/gitlab-templates
+    file:
+      - '/buildcomponents/assumerole.yml'
+
+image: node:14
+
+before_script:
+  - echo "//artifactory.cimpress.io/artifactory/api/npm/npm-release-local/:_authToken=${CT_ARTIFACTORY_NPM_TOKEN}"
+    >> .npmrc
+  - !reference [.assumerolewithawsinstall, script]
+
+variables:
+  BUCKET_SUFFIX: penguinalarm
+  PRD_STACK: PenguinAlarmPrd
+  ROLE_ARN: arn:aws:iam::732882016815:role/runners-orders-instance-role
+
+.python-develop-only: &py-develop-only
+  extends: .python
+  image: python:latest
+  only:
+    - master
+
+stages:
+  - prep
+  - test
+  - build
+  - infrastructure
+  - deploy
+
+populate-artifactory-token:
+  before_script: []
+
+lint:
+  extends:
+    .node
+  stage: test
+  script:
+    - npm run eslint
+  coverage: '/Branches\s*:\s*(\d*\.?\d+)%/'
+  artifacts:
+    paths:
+      - coverage/
+
+build-rev:
+  except:
+    - develop
+
+build-prd:
+  only:
+    - develop
+
+deploy-rev:
+  before_script:
+    - !reference [.assumerolewithawsinstall, script]
+  variables:
+    DOMAIN_NAME: penguin.fi.cimpress.io
+    S3_DEST: s3://prd-$BUCKET_SUFFIX/review/$CI_COMMIT_REF_SLUG/
+  except:
+    - develop
+  environment:
+    url: https://$DOMAIN_NAME/review/$CI_COMMIT_REF_SLUG/
+
+infrastructure-prd:
+  <<: *py-develop-only
+  stage: infrastructure
+  before_script:
+    - !reference [.assumerolewithawsinstall, script]
+  when: manual
+  script:
+    - export AWS_DEFAULT_REGION="eu-west-1"
+    - aws cloudformation deploy --template-file ./cloudformation-prd.yaml --stack-name $PRD_STACK --capabilities CAPABILITY_IAM --no-fail-on-empty-changeset # Run CloudFormation
+
+deploy-prd:
+  variables:
+    DOMAIN_NAME: penguin.fi.cimpress.io
+  only:
+    - develop
+  before_script:
+    - !reference [.assumerolewithawsinstall, script]
+
+stop-rev:
+  before_script:
+    - !reference [.assumerolewithawsinstall, script]
+  except:
+    - develop
+  variables:
+    S3_DEST: s3://prd-$BUCKET_SUFFIX/review/$CI_COMMIT_REF_SLUG/

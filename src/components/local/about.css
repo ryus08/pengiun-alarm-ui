@@ -1,0 +1,18 @@
+.ui.inverted.accordion > .title:not(.ui) {
+  font-weight: bold;
+  font-size: 16pt;
+}
+
+.ui.inverted.accordion > .content {
+  margin-left: 30px;
+  color: #DDDDDD;
+  margin-bottom: 10px;
+}
+
+.ui.inverted.accordion p {
+  line-height: 1.7
+}
+
+.ui.inverted.accordion .ui.ordered.list .list>.item, .ui.ordered.list>.item, ol.ui.list li {
+  line-height: 1.5
+}
