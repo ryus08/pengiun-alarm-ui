@@ -1,11 +1,12 @@
 import moment from 'moment';
 import React from 'react';
 import { List, Header, Segment, Grid } from 'semantic-ui-react';
+import { get as _get } from 'lodash';
 
 function MergeInfoList({ mergeRequest }) {
   const textColor = '#CCCCCC';
   const needsAttention =
-    mergeRequest.prediction.Prediction.predictedLabel === 'bad';
+    _get(mergeRequest, 'prediction.Prediction.predictedLabel') === 'bad';
   return (
     <Segment basic>
       <Grid columns={2} relaxed>

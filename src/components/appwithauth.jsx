@@ -27,7 +27,8 @@ class App extends React.Component {
       .ensureAuthentication(window.location.pathname + window.location.search)
       .then(() => {
         this.setState({ authorizing: false });
-        this.setupTokenRefresh();
+        // I have ho idea how this gets bound
+        // this.setupTokenRefresh();
       })
       .catch((err) => {
         this.setState({ authorizationError: err });

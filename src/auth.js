@@ -1,16 +1,8 @@
-import { centralizedAuth, UserMetadata } from '@cimpress/simple-auth-wrapper';
+import configuredAuth, {
+  getAccessToken as configuredGetAccessToken,
+} from './auth/noAuth';
 
-export const CLIENT_ID = '8x49mJ9tKezGvTbjvqU9IgfhtjmByjrN';
-
-// eslint-disable-next-line new-cap
-const auth = new centralizedAuth({
-  clientID: CLIENT_ID,
-  redirectRoute: '/',
-});
-
+const auth = configuredAuth;
 export default auth;
 
-export const getAccessToken = () => {
-  const userMetadata = new UserMetadata(auth);
-  return userMetadata.auth.getAccessToken();
-};
+export const getAccessToken = configuredGetAccessToken;

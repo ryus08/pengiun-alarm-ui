@@ -34,5 +34,16 @@ Penguin alarm requires a personal gitlab token to access information on your mer
 <a name="newrelic"></a>The new relic api key can be found at [https://scrt.vistaprint.net/SecretView.aspx?secretid=18369](https://scrt.vistaprint.net/SecretView.aspx?secretid=18369).  For access, contact yetisupport@cimpress.com.
 
 ### The config url
-Penguin alarm gets all your custom settings from a yaml file that it polls periodically (it will update your screen without page refreshes).  It expects the yaml file to look something like [the fulfiller integration squad configuration](https://rawgit.com/daward/penguinconfig/master/config.yaml).  We recommend keeping your configuration on github, as that can be updated live, and does not require authentication that penguin alarm will not be able to navigate.
+Penguin alarm gets all your custom settings from a yaml file that it polls periodically (it will update your screen without page refreshes).  It expects the yaml file to look something like [the fulfiller integrati,on squad configuration](https://rawgit.com/daward/penguinconfig/master/config.yaml).  We recommend keeping your configuration on github, as that can be updated live, and does not require authentication that penguin alarm will not be able to navigate.
 
+## TODO:
+
+* user preferences on the server
+* fetch body is different format than RP. Seems like we swapped rp to fetch, but didn't finish
+* Finish fixing the react-selector API problems
+  * Review changes in groupsearch and newrelicsearch, slideshow
+  * fix multitile, commented out right now
+* Actual configurability of:
+    * Auth function, not just the "change what auth.js imports"
+    * server url, not just "change what is set in constants.js"
+    * som this.setupTokenRefresh() in appwithauth.jsx

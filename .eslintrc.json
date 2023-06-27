@@ -36,6 +36,9 @@
         "peerDependencies": false
       }
     ],
+    "import/no-named-as-default": [
+      "warn"
+    ],
     "import/extensions": [
       "error",
       "ignorePackages",

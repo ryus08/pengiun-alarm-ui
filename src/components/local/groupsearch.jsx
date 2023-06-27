@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
-import Select from 'react-select';
+import AsyncSelect from 'react-select/async';
 import { map as _map } from 'lodash';
 import { Form } from 'semantic-ui-react';
 import penguinHost from '../../constants';
@@ -29,12 +29,12 @@ function GroupSearch({ groups, disabled, update }) {
     };
     return fetch(`${penguinHost}/groups?name=${input}`, options)
       .then((response) => response.json())
-      .then((json) => ({
-        options: _map(json, (group) => ({
+      .then((json) =>
+        _map(json, (group) => ({
           value: group.id,
           label: group.name,
         })),
-      }));
+      );
   };
 
   if (disabled) {
@@ -44,9 +44,9 @@ function GroupSearch({ groups, disabled, update }) {
   return (
     <Form.Field>
       <label>GitLab Groups</label>
-      <Select.Async
-        multi
-        {...(disabled ? { disabled: true } : {})}
+      <AsyncSelect
+        isMulti
+        {...(disabled ? { isDisabled: true } : {})}
         value={values()}
         onChange={(value) => onChange(value)}
         loadOptions={getGroups}

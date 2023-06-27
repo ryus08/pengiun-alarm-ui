@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image, Header, Grid, Popup, List, Icon } from 'semantic-ui-react';
+import { get as _get } from 'lodash';
 import Opinion from './opinion';
 
 // eslint-disable-next-line complexity
@@ -12,7 +13,7 @@ function MergeCard({
 }) {
   const style = {};
   const needsAttention =
-    mergeRequest.prediction.Prediction.predictedLabel === 'bad';
+    _get(mergeRequest, 'prediction.Prediction.predictedLabel') === 'bad';
   const textColor = target === 'local' ? '#CCCCCC' : '#333333';
   const attentionGradient = needsAttention
     ? 'linear-gradient(to right, rgba(255, 255, 0, 1) 60%, rgba(255, 255, 0, 0))'
