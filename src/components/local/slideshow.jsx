@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
-import Select from 'react-select';
+import CreatableSelect from 'react-select/creatable';
 import { map as _map } from 'lodash';
 import Container from 'semantic-ui-react/dist/commonjs/elements/Container/Container';
 
@@ -31,11 +31,11 @@ function Slideshow({
     <Container>
       <Form.Field>
         <label>YouTube streams</label>
-        <Select.Creatable
-          multi
-          {...(disabled ? { disabled: true } : {})}
+        <CreatableSelect
+          isMulti
+          {...(disabled ? { isDisabled: true } : {})}
           options={[]}
-          onValueClick={goToYoutube}
+          onValueClick={goToYoutube} // This seems wrong
           onChange={(value) => handleOnChange(value)}
           value={values()}
         />

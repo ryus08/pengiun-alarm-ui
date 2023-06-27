@@ -1,13 +1,14 @@
 // jshint ignore: start
 import React from 'react';
 import { List, Icon, Popup } from 'semantic-ui-react';
+import { get as _get } from 'lodash';
 import MergeInfoList from './mergeinfolist';
 import MergeApproved from './mergeapproved';
 import MergeCommented from './mergecommented';
 
 function MergeState({ mergeRequest }) {
   const needsAttention =
-    mergeRequest.prediction.Prediction.predictedLabel === 'bad';
+    _get(mergeRequest, 'prediction.Prediction.predictedLabel') === 'bad';
   return (
     <List relaxed>
       <List.Item>

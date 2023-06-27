@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
-import Select from 'react-select';
+import AsyncSelect from 'react-select/async';
 import { map as _map } from 'lodash';
 import { Label, Form } from 'semantic-ui-react';
 import NewRelicClient from '../../clients/newrelicclient';
@@ -37,10 +37,10 @@ function NewRelicSearch({ policies, noTeam, nrApiKey, update }) {
   return (
     <Form.Field>
       <label>New Relic Policy</label>
-      <Select.Async
-        multi
+      <AsyncSelect
+        isMulti
         value={values()}
-        {...(nrApiKey === undefined ? { disabled: true } : {})}
+        {...(nrApiKey === undefined ? { isDisabled: true } : {})}
         onChange={(value) => onChange(value)}
         loadOptions={getPolicies}
       />

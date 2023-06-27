@@ -148,10 +148,13 @@ class PenguinClient {
   update({ newrelic, gitlab, slideshow }) {
     const options = _assign(this.generateOptions(), {
       method: 'PUT',
-      json: {
+      body: JSON.stringify({
         newrelic,
         gitlab,
         slideshow,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
       },
     });
 

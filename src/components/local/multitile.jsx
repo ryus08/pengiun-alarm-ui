@@ -11,12 +11,12 @@ class MultiTile extends Component {
     };
   }
 
-  change({ value }) {
-    const { options } = this.props;
-    this.setState({
-      selected: _find(options, (option) => option.value === value),
-    });
-  }
+  // change({ value }) {
+  //   const { options } = this.props;
+  //   this.setState({
+  //     selected: _find(options, (option) => option.value === value),
+  //   });
+  // }
 
   render() {
     const { options, shadeColor } = this.props;
@@ -42,7 +42,7 @@ class MultiTile extends Component {
             borderRadius: '15px 15px 0px 0px',
           }}
         >
-          <Select
+          {/* <Select
             defaultValue={selected.value}
             options={opts}
             style={{
@@ -52,7 +52,7 @@ class MultiTile extends Component {
               fontSize: '12pt',
             }}
             onChange={(event, data) => this.change(data)}
-          />
+          /> */}
         </Segment>
         <Segment
           style={{

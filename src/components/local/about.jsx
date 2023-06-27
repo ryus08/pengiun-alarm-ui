@@ -78,7 +78,8 @@ export default class About extends Component {
                 deployments api works a little differently, if you want to take
                 advantage of deployment tracking, you'll have to add{' '}
                 <b>sa_gitlab_morchsquad@cimpress.com</b> as a reporter in your
-                GitLab group.
+                GitLab group. I think this is the account which runs the penguin
+                server, so whatever account is running that
               </p>
               <Header size="small" inverted>
                 New Relic setup

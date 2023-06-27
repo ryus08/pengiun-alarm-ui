@@ -50,7 +50,7 @@ export function updateConfig() {
     return penguinClient
       .update(data)
       .then(() => dispatch({ type: 'CONFIGURATION_UPDATE_SUCEEDED' }))
-      .tap(() => dispatch(getConfigs()))
+      .then(() => dispatch(getConfigs()))
       .catch((err) => {
         dispatch({ type: 'EDIT_CONFIGURATION_ERROR', err });
       });
