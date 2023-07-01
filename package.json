@@ -1,9 +1,13 @@
 {
-  "name": "penguinalarm",
+  "name": "@ryus08/penguinalarm",
   "version": "0.1.0",
   "private": true,
   "resolutions": {
     "react-error-overlay": "6.0.9"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ryus08/pengiun-alarm-ui.git"
   },
   "dependencies": {
     "@cimpress/simple-auth-wrapper": "^8.3.0",

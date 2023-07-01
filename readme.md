@@ -56,4 +56,3 @@ Environment Variables:
     * some this.setupTokenRefresh() in appwithauth.jsx
 * Get the headless option functional
 * Completely identify all the configuration
-* The Build!
