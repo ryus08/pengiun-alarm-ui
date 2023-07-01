@@ -3,8 +3,7 @@ import React from 'react';
 import AsyncSelect from 'react-select/async';
 import { map as _map } from 'lodash';
 import { Form } from 'semantic-ui-react';
-import penguinHost from '../../constants';
-import { getAccessToken } from '../../auth';
+import PenguinClient from '../../clients/penguinclient';
 
 function GroupSearch({ groups, disabled, update }) {
   const onChange = (values) => {
@@ -24,17 +23,13 @@ function GroupSearch({ groups, disabled, update }) {
       return Promise.resolve({ options: [] });
     }
 
-    const options = {
-      headers: { Authorization: `Bearer ${getAccessToken()}` },
-    };
-    return fetch(`${penguinHost}/groups?name=${input}`, options)
-      .then((response) => response.json())
-      .then((json) =>
-        _map(json, (group) => ({
-          value: group.id,
-          label: group.name,
-        })),
-      );
+    const penguinClient = new PenguinClient();
+    return penguinClient.searchGroups({ name: input }).then((retrievedGroups) =>
+      _map(retrievedGroups, (group) => ({
+        value: group.id,
+        label: group.name,
+      })),
+    );
   };
 
   if (disabled) {

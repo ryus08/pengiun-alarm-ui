@@ -1,5 +1,7 @@
 import YAML from 'yamljs';
 
+// Assumes the config is hosted publically with no auth
+// Used when there is no dedicated backend
 function pollConfig({ configUrl }) {
   return (dispatch) => {
     const refresh = () =>

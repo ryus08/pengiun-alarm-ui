@@ -1,30 +1,30 @@
 /* eslint-disable camelcase, class-methods-use-this */
 import P from 'bluebird';
-import { assign as _assign } from 'lodash';
 import penguinHost from '../constants';
 import { getAccessToken } from '../auth';
+import rpConverter from './rpConverter';
 
+// TODO: should have a differnt client for a specific config vs no specific context
 class PenguinClient {
-  constructor({ configName }) {
+  constructor({ configName } = {}) {
     this.configName = configName;
   }
 
-  generateOptions() {
-    return {
-      auth: {
-        bearer: getAccessToken(),
-      },
-    };
+  generateOptions(rpOptions = {}) {
+    rpOptions.headers = rpOptions.headers || {};
+    rpOptions.headers.Authorization = `Bearer ${getAccessToken()}`;
+    return rpConverter.generateOptions(rpOptions);
   }
 
   setOpinion({ mergeId, value, project_id, iid }) {
-    const options = this.generateOptions();
-    options.method = 'PUT';
-    options.json = {
-      sick: value,
-      project_id,
-      iid,
-    };
+    const options = this.generateOptions({
+      method: 'PUT',
+      json: {
+        sick: value,
+        project_id,
+        iid,
+      },
+    });
     return fetch(
       `${penguinHost}/${this.configName}/opinions/${mergeId}`,
       options,
@@ -55,6 +55,12 @@ class PenguinClient {
         }
         return parsedResponse;
       });
+  }
+
+  getConfigs() {
+    return fetch(`${penguinHost}/configurations`, this.generateOptions()).then(
+      (response) => response.json(),
+    );
   }
 
   getAchievements() {
@@ -100,16 +106,18 @@ class PenguinClient {
   }
 
   deleteConfig() {
-    const options = _assign(this.generateOptions(), { method: 'DELETE' });
-
-    return fetch(`${penguinHost}/configurations/${this.configName}`, options);
+    return fetch(
+      `${penguinHost}/configurations/${this.configName}`,
+      this.generateOptions({ method: 'DELETE' }),
+    );
   }
 
-  getNames({ groupIds }) {
+  getGroups({ groupIds }) {
     return P.map(groupIds, (groupId) => {
-      const options = _assign(this.generateOptions(), { simple: false });
-
-      return fetch(`${penguinHost}/groups?name=${groupId}`, options)
+      return fetch(
+        `${penguinHost}/groups?name=${groupId}`,
+        this.generateOptions(),
+      )
         .then((response) => response.json())
         .then((data) => {
           let nameIdPair = data[0];
@@ -122,6 +130,13 @@ class PenguinClient {
           return nameIdPair;
         });
     });
+  }
+
+  searchGroups({ name }) {
+    return fetch(
+      `${penguinHost}/groups?name=${name}`,
+      this.generateOptions(),
+    ).then((response) => response.json());
   }
 
   getDeploymentHistory() {
@@ -146,19 +161,31 @@ class PenguinClient {
   }
 
   update({ newrelic, gitlab, slideshow }) {
-    const options = _assign(this.generateOptions(), {
-      method: 'PUT',
-      body: JSON.stringify({
-        newrelic,
-        gitlab,
-        slideshow,
+    return fetch(
+      `${penguinHost}/configurations/${this.configName}`,
+      this.generateOptions({
+        method: 'PUT',
+        json: {
+          newrelic,
+          gitlab,
+          slideshow,
+        },
       }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    );
+  }
 
-    return fetch(`${penguinHost}/configurations/${this.configName}`, options);
+  setUserPreferences(json) {
+    return fetch(
+      `${penguinHost}/preferences`,
+      this.generateOptions({
+        method: 'PUT',
+        json,
+      }).then((response) => response.json()),
+    );
+  }
+
+  getUserPreferences() {
+    return fetch(`${penguinHost}/preferences`, this.generateOptions());
   }
 }
 

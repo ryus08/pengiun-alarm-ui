@@ -36,14 +36,24 @@ Penguin alarm requires a personal gitlab token to access information on your mer
 ### The config url
 Penguin alarm gets all your custom settings from a yaml file that it polls periodically (it will update your screen without page refreshes).  It expects the yaml file to look something like [the fulfiller integrati,on squad configuration](https://rawgit.com/daward/penguinconfig/master/config.yaml).  We recommend keeping your configuration on github, as that can be updated live, and does not require authentication that penguin alarm will not be able to navigate.
 
-## TODO:
+## Configuration
 
-* user preferences on the server
-* fetch body is different format than RP. Seems like we swapped rp to fetch, but didn't finish
+Valid query parameters:
+* configUrl - Seems to be a remnant of the ability to load a config without adding it to penguin alarm's backend. Doesn't seem to do too much right now
+* gitlabToken - used to be used for headless mode. Does not currently work
+
+Environment Variables:
+* 
+
+# TODO:
+
 * Finish fixing the react-selector API problems
   * Review changes in groupsearch and newrelicsearch, slideshow
   * fix multitile, commented out right now
 * Actual configurability of:
     * Auth function, not just the "change what auth.js imports"
     * server url, not just "change what is set in constants.js"
-    * som this.setupTokenRefresh() in appwithauth.jsx
+    * some this.setupTokenRefresh() in appwithauth.jsx
+* Get the headless option functional
+* Completely identify all the configuration
+* The Build!
