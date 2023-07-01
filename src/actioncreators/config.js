@@ -1,26 +1,20 @@
 import { map as _map, get as _get } from 'lodash';
 import P from 'bluebird';
 import PenguinClient from '../clients/penguinclient';
-import penguinHost from '../constants';
-import { getAccessToken } from '../auth';
 
 export function getConfigs() {
   return (dispatch) => {
-    const options = {
-      headers: { Authorization: `Bearer ${getAccessToken()}` },
-    };
-    return fetch(`${penguinHost}/configurations`, options)
-      .then((response) => response.json())
-      .then((json) => {
-        let configs = _map(json, ({ link, id }) => ({
-          value: link,
-          label: id,
-        }));
-        configs = configs.sort((a, b) =>
-          a.label.toLowerCase().localeCompare(b.label.toLowerCase()),
-        );
-        dispatch({ type: 'CONFIG_LIST_LOADED', configs });
-      });
+    const penguinClient = new PenguinClient();
+    return penguinClient.getConfigs().then((json) => {
+      let configs = _map(json, ({ link, id }) => ({
+        value: link,
+        label: id,
+      }));
+      configs = configs.sort((a, b) =>
+        a.label.toLowerCase().localeCompare(b.label.toLowerCase()),
+      );
+      dispatch({ type: 'CONFIG_LIST_LOADED', configs });
+    });
   };
 }
 
@@ -88,7 +82,7 @@ export function loadConfig({ name }) {
       .then((config) => {
         if (_get(config, 'gitlab.groupIds')) {
           return penguinClient
-            .getNames({ groupIds: config.gitlab.groupIds })
+            .getGroups({ groupIds: config.gitlab.groupIds })
             .then((names) => {
               config.gitlab.groups = names;
             })
