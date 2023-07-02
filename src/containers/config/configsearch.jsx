@@ -1,11 +1,9 @@
 import { connect } from 'react-redux';
 import TheComponent from '../../components/local/configsearch';
 import { loadConfig } from '../../actioncreators/config';
-import penguinHost from '../../constants';
 
 const mapStateToProps = (state) => ({
   config: {
-    value: `${penguinHost}/configurations/${state.configEdit.name}`,
     label: state.configEdit.name,
   },
   configs: state.configEdit.configs,

@@ -1,8 +1,12 @@
 /* eslint-disable camelcase, class-methods-use-this */
 import P from 'bluebird';
-import penguinHost from '../constants';
 import { getAccessToken } from '../auth';
 import rpConverter from './rpConverter';
+
+export const penguinHost = process.env.REACT_APP_PENGUIN_HOST.replaceAll(
+  "'",
+  '',
+).trim();
 
 // TODO: should have a differnt client for a specific config vs no specific context
 class PenguinClient {

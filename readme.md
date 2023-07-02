@@ -43,7 +43,7 @@ Valid query parameters:
 * gitlabToken - used to be used for headless mode. Does not currently work
 
 Environment Variables:
-* 
+* REACT_APP_PENGUIN_HOST - the host for the backend. npm start will set this to localhost:8080
 
 # TODO:
 
@@ -52,8 +52,8 @@ Environment Variables:
   * fix multitile, commented out right now
 * Actual configurability of:
     * Auth function, not just the "change what auth.js imports"
-    * server url, not just "change what is set in constants.js"
     * some this.setupTokenRefresh() in appwithauth.jsx
 * Get the headless option functional
 * Completely identify all the configuration
-* The Build!
+* npm install builds something un-runnable, so we can't even change dependencies. Once we can, remove jsonwebtoken (which is ignored in depcheck)
+* Some package upgrades. Seems like some of the react helpers don't allow react 18, so we can't upgrade node in the build

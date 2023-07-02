@@ -1,9 +1,13 @@
 {
-  "name": "penguinalarm",
+  "name": "@ryus08/penguinalarm",
   "version": "0.1.0",
   "private": true,
   "resolutions": {
     "react-error-overlay": "6.0.9"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ryus08/pengiun-alarm-ui.git"
   },
   "dependencies": {
     "@cimpress/simple-auth-wrapper": "^8.3.0",
@@ -47,9 +51,9 @@
     "yamljs": "^0.3.0"
   },
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "set REACT_APP_PENGUIN_HOST=http://localhost:8080 && react-app-rewired start",
     "build": "react-app-rewired build",
-    "test": "npm run eslint && depcheck . --ignores husky,newrelic,typescript,@types/jest,util",
+    "test": "npm run eslint && depcheck . --ignores husky,newrelic,typescript,@types/jest,util,jsonwebtoken",
     "clean": "rm -rf build",
     "eject": "react-scripts eject",
     "eslint": "eslint ./src --ext .js --ext .jsx",
