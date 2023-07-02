@@ -56,3 +56,5 @@ Environment Variables:
     * some this.setupTokenRefresh() in appwithauth.jsx
 * Get the headless option functional
 * Completely identify all the configuration
+* npm install builds something un-runnable, so we can't even change dependencies. Once we can, remove jsonwebtoken (which is ignored in depcheck)
+* Some package upgrades. Seems like some of the react helpers don't allow react 18, so we can't upgrade node in the build

@@ -53,7 +53,7 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "test": "npm run eslint && depcheck . --ignores husky,newrelic,typescript,@types/jest,util",
+    "test": "npm run eslint && depcheck . --ignores husky,newrelic,typescript,@types/jest,util,jsonwebtoken",
     "clean": "rm -rf build",
     "eject": "react-scripts eject",
     "eslint": "eslint ./src --ext .js --ext .jsx",

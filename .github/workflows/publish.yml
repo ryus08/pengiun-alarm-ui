@@ -1,14 +1,14 @@
 name: publish # TODO: have this use the build workflow
 on:
-  nvm release:
+  release:
     types: [created]
 jobs:
   build:
     name: publish
     runs-on: ubuntu-latest
-   permissions:
-     contents: read
-     id-token: write
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
