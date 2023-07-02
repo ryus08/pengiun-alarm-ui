@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Segment, Select } from 'semantic-ui-react';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { map as _map, find as _find } from 'lodash';
 
 class MultiTile extends Component {
@@ -21,6 +23,7 @@ class MultiTile extends Component {
   render() {
     const { options, shadeColor } = this.props;
     const { selected } = this.state;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const opts = _map(options, (opt) => ({
       value: opt.value,
       text: opt.text,
