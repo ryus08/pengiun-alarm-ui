@@ -51,7 +51,7 @@
     "yamljs": "^0.3.0"
   },
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "set REACT_APP_PENGUIN_HOST=http://localhost:8080 && react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "npm run eslint && depcheck . --ignores husky,newrelic,typescript,@types/jest,util,jsonwebtoken",
     "clean": "rm -rf build",

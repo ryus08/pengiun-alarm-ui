@@ -2,6 +2,8 @@ name: publish # TODO: have this use the build workflow
 on:
   release:
     types: [created]
+env:
+  REACT_APP_PENGUIN_HOST: https://penguinserver.fi.cimpress.io
 jobs:
   build:
     name: publish
