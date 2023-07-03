@@ -17,7 +17,6 @@
     "depcheck": "^1.4.3",
     "eslint-config-react-app": "^7.0.1",
     "https-browserify": "^1.0.0",
-    "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "moment-business-time": "^2.0.0",
@@ -53,7 +52,7 @@
   "scripts": {
     "start": "set REACT_APP_PENGUIN_HOST=http://localhost:8080 && react-app-rewired start",
     "build": "react-app-rewired build",
-    "test": "npm run eslint && depcheck . --ignores husky,newrelic,typescript,@types/jest,util,jsonwebtoken",
+    "test": "npm run eslint && depcheck . --ignores husky,newrelic,typescript,@types/jest,util",
     "clean": "rm -rf build",
     "eject": "react-scripts eject",
     "eslint": "eslint ./src --ext .js --ext .jsx",
