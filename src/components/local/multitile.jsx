@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Segment, Select } from 'semantic-ui-react';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { map as _map, find as _find } from 'lodash';
 
 class MultiTile extends Component {
@@ -13,17 +11,16 @@ class MultiTile extends Component {
     };
   }
 
-  // change({ value }) {
-  //   const { options } = this.props;
-  //   this.setState({
-  //     selected: _find(options, (option) => option.value === value),
-  //   });
-  // }
+  change({ value }) {
+    const { options } = this.props;
+    this.setState({
+      selected: _find(options, (option) => option.value === value),
+    });
+  }
 
   render() {
     const { options, shadeColor } = this.props;
     const { selected } = this.state;
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const opts = _map(options, (opt) => ({
       value: opt.value,
       text: opt.text,
@@ -45,7 +42,7 @@ class MultiTile extends Component {
             borderRadius: '15px 15px 0px 0px',
           }}
         >
-          {/* <Select
+          <Select
             defaultValue={selected.value}
             options={opts}
             style={{
@@ -55,7 +52,7 @@ class MultiTile extends Component {
               fontSize: '12pt',
             }}
             onChange={(event, data) => this.change(data)}
-          /> */}
+          />
         </Segment>
         <Segment
           style={{

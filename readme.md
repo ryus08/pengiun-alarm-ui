@@ -49,9 +49,6 @@ Environment Variables:
 
 P0
 
-* Finish fixing the react-selector API problems
-  * Review changes in groupsearch and newrelicsearch, slideshow
-  * fix multitile, commented out right now
 * Actual configurability of:
     * Auth function, not just the "change what auth.js imports"
     * some this.setupTokenRefresh() in appwithauth.jsx
@@ -62,3 +59,4 @@ P1
 * Get the headless option functional
 * Completely identify all the configuration
 * Some package upgrades. Seems like some of the react helpers don't allow react 18, so we can't upgrade node in the build. react-scripts (create-react-app) is no longer reccommended, might need to swap this to get nodejs upgraded too
+* Get user preferences to display, not just save. Boxes they are entered in never show state from the server

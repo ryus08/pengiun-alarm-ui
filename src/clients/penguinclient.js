@@ -184,8 +184,8 @@ class PenguinClient {
       this.generateOptions({
         method: 'PUT',
         json,
-      }).then((response) => response.json()),
-    );
+      }),
+    ).then((response) => response.json());
   }
 
   getUserPreferences() {

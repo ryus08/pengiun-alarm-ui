@@ -38,7 +38,6 @@ function GraphView() {
       text: 'Project Effort',
       content: <ProjectEffort />,
     },
-    ...{},
   ];
   return (
     <Grid padded column="1">

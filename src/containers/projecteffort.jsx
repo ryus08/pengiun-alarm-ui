@@ -28,24 +28,27 @@ const mapStateToProps = (state) => {
     };
   });
 
-  const analysis = [
-    {
-      name: 'Average Effort',
-      value: _meanBy(effort, 'latestEffort'),
-    },
-    {
-      name: 'Median Effort',
-      value: effort[Math.floor(effort.length / 2)].totalEffort,
-    },
-    {
-      name: 'Total Comments',
-      value: _sumBy(effort, 'totalComments'),
-    },
-    {
-      name: 'Total Merges',
-      value: _sumBy(effort, 'totalMerges'),
-    },
-  ];
+  const analysis =
+    effort.length === 0
+      ? []
+      : [
+          {
+            name: 'Average Effort',
+            value: _meanBy(effort, 'latestEffort'),
+          },
+          {
+            name: 'Median Effort',
+            value: effort[Math.floor(effort.length / 2)].totalEffort,
+          },
+          {
+            name: 'Total Comments',
+            value: _sumBy(effort, 'totalComments'),
+          },
+          {
+            name: 'Total Merges',
+            value: _sumBy(effort, 'totalMerges'),
+          },
+        ];
 
   return {
     effort,
