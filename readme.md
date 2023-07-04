@@ -44,6 +44,8 @@ Valid query parameters:
 
 Environment Variables:
 * REACT_APP_PENGUIN_HOST - the host for the backend. npm start will set this to localhost:8080
+* REACT_APP_CLIENT_ID - the client id for you application used for OIDC
+* REACT_APP_AUTHORITY - the OIDC provider url
 
 # TODO:
 
@@ -56,6 +58,7 @@ P0
 
 P1
 
+* Put signin in menu
 * Get the headless option functional
 * Completely identify all the configuration
 * Some package upgrades. Seems like some of the react helpers don't allow react 18, so we can't upgrade node in the build. react-scripts (create-react-app) is no longer reccommended, might need to swap this to get nodejs upgraded too

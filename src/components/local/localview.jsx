@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { Menu, Icon, Transition, Container } from 'semantic-ui-react';
+import { withAuth } from 'react-oidc-context';
 import Local from './local';
 import GraphView from './graphview';
 import About from './about';
@@ -11,15 +12,11 @@ import SickMergeRequests from '../../containers/sickmergerequests';
 import Configuration from './configuration';
 import userSettings from '../../usersettings';
 import UserPreferences from '../../containers/config/userpreferences';
-import auth from '../../auth';
-
-const handleLogout = () => auth.logout('/');
 
 const handleTvLink = () => {
   window.open(userSettings.addParams({ tv: 'true' }), '_blank');
 };
-
-export default class LocalView extends Component {
+class LocalView extends Component {
   constructor(props) {
     super(props);
     this.state = { visible: this.props.startPage };
@@ -30,6 +27,7 @@ export default class LocalView extends Component {
   }
 
   render() {
+    const { auth } = this.props;
     const topColor = `${this.props.topColor.r}, ${this.props.topColor.g}, ${this.props.topColor.b}`;
     const bottomColor = `${this.props.bottomColor.r}, ${this.props.bottomColor.g}, ${this.props.bottomColor.b}`;
     const bgImage = `background-image: url('penguin.png'), linear-gradient(rgb(${topColor}) 25%, rgb(${bottomColor}))`;
@@ -177,7 +175,13 @@ export default class LocalView extends Component {
           >
             <Icon name="legal" />
           </Menu.Item>
-          <Menu.Item name="logout" active={false} onClick={handleLogout}>
+          <Menu.Item
+            name="logout"
+            active={false}
+            onClick={() => {
+              auth.removeUser();
+            }}
+          >
             <Icon name="sign out" />
           </Menu.Item>
         </Menu>
@@ -185,3 +189,5 @@ export default class LocalView extends Component {
     );
   }
 }
+
+export default withAuth(LocalView);
