@@ -1,6 +1,6 @@
 /* eslint-disable camelcase, class-methods-use-this */
 import P from 'bluebird';
-import { getAccessToken } from '../auth';
+import { getUserFromStorage } from '../auth';
 import rpConverter from './rpConverter';
 
 export const penguinHost = process.env.REACT_APP_PENGUIN_HOST.replaceAll(
@@ -12,11 +12,12 @@ export const penguinHost = process.env.REACT_APP_PENGUIN_HOST.replaceAll(
 class PenguinClient {
   constructor({ configName } = {}) {
     this.configName = configName;
+    this.user = getUserFromStorage();
   }
 
   generateOptions(rpOptions = {}) {
     rpOptions.headers = rpOptions.headers || {};
-    rpOptions.headers.Authorization = `Bearer ${getAccessToken()}`;
+    rpOptions.headers.Authorization = `Bearer ${this.user?.access_token}`;
     return rpConverter.generateOptions(rpOptions);
   }
 

@@ -4,6 +4,7 @@ import 'semantic-ui-css/semantic.min.css';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
+import { AuthProvider } from 'react-oidc-context';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
@@ -16,6 +17,7 @@ import AppWithAuth from './components/appwithauth';
 import { getConfigs } from './actioncreators/config';
 
 import userSettings from './usersettings';
+import { oidcConfig } from './auth';
 import { getUserPreferences } from './actioncreators/userpreferences';
 
 const store = createStore(
@@ -44,7 +46,9 @@ if (userSettings.local) {
 
 ReactDOM.render(
   <Provider store={store}>
-    <AppWithAuth>{content}</AppWithAuth>
+    <AuthProvider {...oidcConfig}>
+      <AppWithAuth>{content}</AppWithAuth>
+    </AuthProvider>
   </Provider>,
   document.getElementById('root'),
 );
