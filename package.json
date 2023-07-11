@@ -51,7 +51,7 @@
     "yamljs": "^0.3.0"
   },
   "scripts": {
-    "start": "set REACT_APP_PENGUIN_HOST=http://localhost:8080 && set REACT_APP_CLIENT_ID=3b18a5ef7d68be0b8ea34e4c8bcac17180736f405f0b766a0e1888b3e2afebd2 && set REACT_APP_AUTHORITY=https://gitlab.com && react-app-rewired start",
+    "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "npm run eslint && depcheck . --ignores husky,newrelic,typescript,@types/jest,util",
     "clean": "rm -rf build",
