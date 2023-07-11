@@ -10,6 +10,9 @@ export const oidcConfig = {
   onSignoutCallback: () => {
     window.history.replaceState({}, document.title, '/');
   },
+  extraQueryParams: {
+    audience: 'PenguinAlarm',
+  },
 };
 
 export const getUserFromStorage = () => {

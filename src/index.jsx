@@ -28,6 +28,7 @@ const store = createStore(
 );
 
 let content;
+// This is never true
 if (userSettings.local) {
   content = (
     <LocalView

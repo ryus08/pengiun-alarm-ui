@@ -17,7 +17,7 @@ class PenguinClient {
 
   generateOptions(rpOptions = {}) {
     rpOptions.headers = rpOptions.headers || {};
-    rpOptions.headers.Authorization = `Bearer ${this.user?.id_token}`;
+    rpOptions.headers.Authorization = `Bearer ${this.user?.access_token}`;
     return rpConverter.generateOptions(rpOptions);
   }
 
