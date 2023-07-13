@@ -12,6 +12,7 @@ import SickMergeRequests from '../../containers/sickmergerequests';
 import Configuration from './configuration';
 import userSettings from '../../usersettings';
 import UserPreferences from '../../containers/config/userpreferences';
+import GitProviderSignin from './gitProviderSignin';
 
 const handleTvLink = () => {
   window.open(userSettings.addParams({ tv: 'true' }), '_blank');
@@ -27,7 +28,8 @@ class LocalView extends Component {
   }
 
   render() {
-    const { auth } = this.props;
+    const { auth, gitProvider, setUserGitProvider, deleteUserGitProvider } =
+      this.props;
     const topColor = `${this.props.topColor.r}, ${this.props.topColor.g}, ${this.props.topColor.b}`;
     const bottomColor = `${this.props.bottomColor.r}, ${this.props.bottomColor.g}, ${this.props.bottomColor.b}`;
     const bgImage = `background-image: url('penguin.png'), linear-gradient(rgb(${topColor}) 25%, rgb(${bottomColor}))`;
@@ -184,6 +186,12 @@ class LocalView extends Component {
           >
             <Icon name="sign out" />
           </Menu.Item>
+          <GitProviderSignin
+            key="GitProviderLogin"
+            gitProvider={gitProvider}
+            setUserGitProvider={setUserGitProvider}
+            deleteUserGitProvider={deleteUserGitProvider}
+          />
         </Menu>
       </Container>
     );

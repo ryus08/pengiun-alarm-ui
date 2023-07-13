@@ -16,6 +16,7 @@ function UserPreferences({
   monthActivity,
   bottomColor,
   update,
+  gitProvider,
 }) {
   const changeGitLabUsername = (event) => {
     update({
@@ -23,6 +24,7 @@ function UserPreferences({
       nrApiKey,
       topColor,
       bottomColor,
+      gitProvider,
     });
   };
 
@@ -32,6 +34,7 @@ function UserPreferences({
       gitLabUsername,
       topColor,
       bottomColor,
+      gitProvider,
     });
   };
 
@@ -41,6 +44,7 @@ function UserPreferences({
       gitLabUsername,
       topColor: color.rgb,
       bottomColor,
+      gitProvider,
     });
   };
 
@@ -50,6 +54,7 @@ function UserPreferences({
       gitLabUsername,
       topColor,
       bottomColor: color.rgb,
+      gitProvider,
     });
   };
 

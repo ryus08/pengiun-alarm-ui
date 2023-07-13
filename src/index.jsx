@@ -47,7 +47,12 @@ if (userSettings.local) {
 
 ReactDOM.render(
   <Provider store={store}>
-    <AuthProvider {...oidcConfig}>
+    <AuthProvider
+      {...oidcConfig}
+      skipSigninCallback={
+        new URL(oidcConfig.redirect_uri).pathname !== window.location.pathname
+      }
+    >
       <AppWithAuth>{content}</AppWithAuth>
     </AuthProvider>
   </Provider>,

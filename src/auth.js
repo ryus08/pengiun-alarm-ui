@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { User } from 'oidc-client-ts';
 
 export const oidcConfig = {
@@ -7,6 +8,7 @@ export const oidcConfig = {
   onSigninCallback: ({ state }) => {
     window.history.replaceState({}, document.title, state.pathname);
   },
+  // TODO: should this be onRemoveUser?
   onSignoutCallback: () => {
     window.history.replaceState({}, document.title, '/');
   },
@@ -14,6 +16,39 @@ export const oidcConfig = {
     audience: 'PenguinAlarm',
   },
 };
+
+export const gitProviders = {};
+
+const addGitProviderConfigIfDefined = (providers, gitProviderName, color) => {
+  const authority = (
+    process.env[`REACT_APP_${gitProviderName.toUpperCase()}_AUTHORITY`] || ''
+  )
+    .replaceAll("'", '')
+    .trim();
+  const client_id = (
+    process.env[`REACT_APP_${gitProviderName.toUpperCase()}_CLIENT_ID`] || ''
+  )
+    .replaceAll("'", '')
+    .trim();
+
+  if (authority && client_id) {
+    providers[gitProviderName] = {
+      color,
+      oidcConfig: {
+        authority,
+        client_id,
+        redirect_uri: `${window.location.origin}/app/login/${gitProviderName}`,
+        onSigninCallback: ({ state }) => {
+          window.history.replaceState({}, document.title, state.pathname);
+        },
+        scope: 'read_api',
+      },
+    };
+  }
+};
+addGitProviderConfigIfDefined(gitProviders, 'gitlab', 'orange');
+addGitProviderConfigIfDefined(gitProviders, 'github', 'purple');
+addGitProviderConfigIfDefined(gitProviders, 'bitbucket', 'blue');
 
 export const getUserFromStorage = () => {
   const oidcStorage = sessionStorage.getItem(
