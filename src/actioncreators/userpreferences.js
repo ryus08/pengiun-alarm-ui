@@ -12,6 +12,34 @@ export function setUserPreferences(data) {
   };
 }
 
+export function setUserGitProvider(providerName, data) {
+  return (dispatch) => {
+    return penguinClient
+      .setUserGitProvider(providerName, data)
+      .then(() => penguinClient.getUserPreferences())
+      .then((preferences) => {
+        dispatch({
+          type: 'USER_PREFERENCES_CHANGED',
+          preferences,
+        });
+      });
+  };
+}
+
+export function deleteUserGitProvider() {
+  return (dispatch) => {
+    return penguinClient
+      .deleteUserGitProvider()
+      .then(() => penguinClient.getUserPreferences())
+      .then((preferences) => {
+        dispatch({
+          type: 'USER_PREFERENCES_CHANGED',
+          preferences,
+        });
+      });
+  };
+}
+
 export function getUserPreferences() {
   return (dispatch) => {
     return penguinClient

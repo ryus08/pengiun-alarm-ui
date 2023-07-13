@@ -190,7 +190,28 @@ class PenguinClient {
   }
 
   getUserPreferences() {
-    return fetch(`${penguinHost}/preferences`, this.generateOptions());
+    return fetch(`${penguinHost}/preferences`, this.generateOptions()).then(
+      (response) => response.json(),
+    );
+  }
+
+  setUserGitProvider(providerName, json) {
+    return fetch(
+      `${penguinHost}/preferences/gitProvider`,
+      this.generateOptions({
+        method: 'PUT',
+        json: { ...json, providerName },
+      }),
+    ).then((response) => response.json());
+  }
+
+  deleteUserGitProvider() {
+    return fetch(
+      `${penguinHost}/preferences/gitProvider`,
+      this.generateOptions({
+        method: 'DELETE',
+      }),
+    );
   }
 }
 

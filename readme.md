@@ -44,16 +44,18 @@ Valid query parameters:
 
 Environment Variables:
 * REACT_APP_PENGUIN_HOST - the host for the backend. npm start will set this to localhost:8080
-* REACT_APP_CLIENT_ID - the client id for you application used for OIDC
+* REACT_APP_CLIENT_ID - the client id for your application to use for OIDC
 * REACT_APP_AUTHORITY - the OIDC provider url
+* For each possible git provider (GITLAB, GITHUB, BITBUCKET) - (Only gitlab is *actually* supported by the backend at this point)
+    * REACT_APP_${PROVIDER}_CLIENT_ID - the client id for you application to use for Oauth with the git provider
+    * REACT_APP_${PROVIDER}_AUTHORITY - the OAuth provider url for the git provider
+
+Note: the required ones have placeholders in .env. The optional ones don't. You can set yours in .env.development.local (ignored by git)
 
 # TODO:
 
 P0
 
-* Actual configurability of:
-    * Auth function, not just the "change what auth.js imports"
-    * some this.setupTokenRefresh() in appwithauth.jsx
 * Get the publish in a state it can be used but configured. So probably as a package, not a distributable
 
 P1
