@@ -137,9 +137,10 @@ class PenguinClient {
     });
   }
 
-  searchGroups({ name }) {
+  searchGroups({ name, asMaintainer = false }) {
+    const maintainerAppend = asMaintainer ? '&asMaintainer=true' : '';
     return fetch(
-      `${penguinHost}/groups?name=${name}`,
+      `${penguinHost}/groups?name=${name}${maintainerAppend}`,
       this.generateOptions(),
     ).then((response) => response.json());
   }
