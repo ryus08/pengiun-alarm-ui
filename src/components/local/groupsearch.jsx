@@ -24,12 +24,16 @@ function GroupSearch({ groups, disabled, update }) {
     }
 
     const penguinClient = new PenguinClient();
-    return penguinClient.searchGroups({ name: input }).then((retrievedGroups) =>
-      _map(retrievedGroups, (group) => ({
-        value: group.id,
-        label: group.name,
-      })),
-    );
+    // If the user isn't a maintainer, they won't be able to add the config anyways,
+    // So filter on that during the search
+    return penguinClient
+      .searchGroups({ name: input, asMaintainer: true })
+      .then((retrievedGroups) =>
+        _map(retrievedGroups, (group) => ({
+          value: group.id,
+          label: group.name,
+        })),
+      );
   };
 
   if (disabled) {
