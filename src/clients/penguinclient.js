@@ -8,6 +8,8 @@ export const penguinHost = process.env.REACT_APP_PENGUIN_HOST.replaceAll(
   '',
 ).trim();
 
+const tokenType = process.env.REACT_APP_TOKEN_TYPE.replaceAll("'", '').trim();
+
 // TODO: should have a differnt client for a specific config vs no specific context
 class PenguinClient {
   constructor({ configName } = {}) {
@@ -17,7 +19,8 @@ class PenguinClient {
 
   generateOptions(rpOptions = {}) {
     rpOptions.headers = rpOptions.headers || {};
-    rpOptions.headers.Authorization = `Bearer ${this.user?.access_token}`;
+    const token = this.user && this.user[tokenType];
+    rpOptions.headers.Authorization = `Bearer ${token}`;
     return rpConverter.generateOptions(rpOptions);
   }
 

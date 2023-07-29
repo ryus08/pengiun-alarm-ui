@@ -15,6 +15,7 @@ export const oidcConfig = {
   extraQueryParams: {
     audience: 'PenguinAlarm',
   },
+  scope: process.env.REACT_APP_AUTHN_SCOPE.replaceAll("'", '').trim(),
 };
 
 export const gitProviders = {};
