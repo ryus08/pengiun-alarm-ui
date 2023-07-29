@@ -49,6 +49,8 @@ Environment Variables:
 * For each possible git provider (GITLAB, GITHUB, BITBUCKET) - (Only gitlab is *actually* supported by the backend at this point)
     * REACT_APP_${PROVIDER}_CLIENT_ID - the client id for you application to use for Oauth with the git provider
     * REACT_APP_${PROVIDER}_AUTHORITY - the OAuth provider url for the git provider
+* REACT_APP_TOKEN_TYPE - the type of token to use. Defaults to `access_token`
+* REACT_APP_AUTHN_SCOPE - the scopes to request as part of the authentication token flow. Defaults to `openid`
 
 Note: the required ones have placeholders in .env. The optional ones don't. You can set yours in .env.development.local (ignored by git)
 
