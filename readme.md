@@ -1,3 +1,5 @@
+> **_NOTE:_** Moved to https://github.com/mindha-us/penguin-alarm-server
+
 # What is Penguin Alarm
 The concept of penguin alarm is to provide your team a shared understanding of responsibilities as team members with an engaging backdrop of livestreams.  It lets your team members know what merge requests are open in gitlab, as well as what problems you may be experiencing in production.
 
